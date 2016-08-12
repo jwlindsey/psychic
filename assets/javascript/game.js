@@ -1,13 +1,16 @@
 // javascript for psychic
+//function generateRandomNumber() {
+//  var ranNum = Math.ceil(Math.random() * 20);}
 
 function playGame() {
+    var ranNum = Math.ceil(Math.random() * 20);
     var guessedCorrectly = false;
     var playerGuess;
     var guessesRemaining = 10;
     var guessedNumbers = document.getElementById("yourGuesses");
-
-    function generateRandomNumber() {
-      var ranNum = Math.ceil(Math.random() * 20);}
+    // Declares the tallies to 0
+    var wins = 0;
+    var losses = 0;
     // Clearing the yourgueses div for a new game
     guessedNumbers.innerHTML = "";
 
