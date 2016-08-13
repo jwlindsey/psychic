@@ -10,6 +10,8 @@ var theWorks = function() {
 ranLet = letters[Math.floor(Math.random() * letters.length)];
 guessesRemaining = 5;
 guessedLetters = [];
+// What number did the computer pick?
+console.log("The letter is: " + ranLet);
 }
 // Records wins, losses, and guesses
 var record = function() {
@@ -23,12 +25,23 @@ var record = function() {
 
 record();
 theWorks();
-// What number did the computer pick?
-console.log("The letter is: " + ranLet);
 //Reacts to keystrokes
 document.onkeyup = function(event) {
 	var playerGuess = String.fromCharCode(event.keyCode).toLowerCase();
-
+  var validGuess = false
+      for (var i=0; i < letters.length; i++){
+//Checks to see if what the player typed is a valid letter
+        if (playerGuess == letters[i]){
+            validGuess=true
+            }
+          }
+        if (!validGuess) {
+          alert("Please select a real letter!")
+          return;
+        }
+//Pushes letters guessed to guessed field
+      guessedLetters.push(playerGuess);
+//Compares answers
       if (playerGuess == ranLet) {
           alert("Correct!");
           wins++;
@@ -39,8 +52,8 @@ document.onkeyup = function(event) {
           theWorks();
       }
 
-      guessedLetters.push(playerGuess);
       guessesRemaining--;
+
 
   record();
 }
