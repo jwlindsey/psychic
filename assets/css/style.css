@@ -1,12 +1,15 @@
 /*Sytelsheet*/
 
 
-#letter {
-
+h1 {
+  font-size: 3em;
+  font-weight: bold;
 }
-#guess {
-
+h2 {
+  font-size: 2em;
+  font-style: italic;
+  font-weight: bold;
 }
-#restart {
-
+div {
+  font-size: 1em;
 }

@@ -16,8 +16,7 @@ console.log("The letter is: " + ranLet);
 // Records wins, losses, and guesses
 var record = function() {
   //// Taking the tallies and displaying them in HTML
-  var html = "<p>Guess a letter</p>" +
-  "<p>wins: " + wins + "</p>" + "<p>losses: " + losses + "</p>" + "<p>Your Guesses: " + guessedLetters + "</p>"
+  var html ="<p>wins: " + wins + "</p>" + "<p>losses: " + losses + "</p>" + "<p>Your Guesses: " + guessedLetters + "</p>"
 
   //// Placing the html into the game ID
   document.getElementById('game').innerHTML = html;
