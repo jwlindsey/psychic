@@ -1,55 +1,46 @@
 // javascript for psychic
-//function generateRandomNumber() {
-//  var ranNum = Math.ceil(Math.random() * 20);}
 
-function playGame() {
-    var ranNum = Math.ceil(Math.random() * 20);
-    var guessedCorrectly = false;
-    var playerGuess;
-    var guessesRemaining = 10;
-    var guessedNumbers = document.getElementById("yourGuesses");
-    // Declares the tallies to 0
-    var wins = 0;
-    var losses = 0;
-    // Clearing the yourgueses div for a new game
-    guessedNumbers.innerHTML = "";
+var letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+var ranLet, guessesRemaining, guessedLetters;
+// Declares the tallies to 0
+var wins = 0;
+var losses = 0;
+// resets these variables
+var theWorks = function() {
+ranLet = letters[Math.floor(Math.random() * letters.length)];
+guessesRemaining = 5;
+guessedLetters = [];
+}
+// Records wins, losses, and guesses
+var record = function() {
+  //// Taking the tallies and displaying them in HTML
+  var html = "<p>Guess a letter</p>" +
+  "<p>wins: " + wins + "</p>" + "<p>losses: " + losses + "</p>" + "<p>Your Guesses: " + guessedLetters + "</p>"
 
-    // What number did the computer pick?
-    console.log("The number is: " + ranNum);
+  //// Placing the html into the game ID
+  document.getElementById('game').innerHTML = html;
+};
 
-    // Keep checking until you get the right answer, or the player runs out of guesses
-    while ((guessesRemaining > 0) && (guessedCorrectly == false)) {
-        // Check out how you captured the user input in rps-9 (no prompt)
-        playerGuess = prompt("Guess a number between 1 and 20!");
+record();
+theWorks();
+// What number did the computer pick?
+console.log("The letter is: " + ranLet);
+//Reacts to keystrokes
+document.onkeyup = function(event) {
+	var playerGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
-        if (playerGuess == ranNum) {
-            alert("Correct!");
-            // Don't forget to initialize wins
-            wins++;
-            guessedCorrectly = true;
-        }
-        else if (playerGuess > ranNum) {
-            // In rps you captured these as variables and read them with html...
-            alert("Guess lower!");
-        }
-        else if (playerGuess < ranNum) {
-            alert("Guess higher!!");
-        }
+      if (playerGuess == ranLet) {
+          alert("Correct!");
+          wins++;
+          theWorks();
+      } else if (guessesRemaining == 0) {
+          alert('Too bad, you lose ... The letter was ' + ranLet);
+          losses++;
+          theWorks();
+      }
 
-        guessedNumbers.innerHTML += playerGuess + " ";
-        guessesRemaining--;
-    }
+      guessedLetters.push(playerGuess);
+      guessesRemaining--;
 
-    // Runs if the loop quits (you ran out of guesses)
-    if (!guessedCorrectly) {
-        alert('Too bad, you lose ... The number was ' + ranNum);
-        losses++;
-    }
-
-    //// Taking the tallies and displaying them in HTML
-    var html = "<p>Guess a number between 1 and 20</p>" +
-    "<p>wins: " + wins + "</p>" + "<p>losses: " + losses + "</p>" + "<p>Your Guesses: " + yourGuesses + "</p>"
-
-    //// Placing the html into the game ID
-    document.querySelector('#game').innerHTML = html;
+  record();
 }
